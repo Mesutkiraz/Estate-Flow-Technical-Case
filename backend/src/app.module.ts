@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AgentsModule } from './agents/agents.module';
+import { CommissionModule } from './commission/commission.module';
 
 @Module({
   imports: [
@@ -15,8 +15,10 @@ import { AppService } from './app.service';
           'mongodb://127.0.0.1:27017/estate',
       }),
     }),
+    AgentsModule,
+    CommissionModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

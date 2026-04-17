@@ -44,3 +44,19 @@ Environment variables (`backend/.env`):
 | ----------- | --------------------------------------------- | ----------------------------- |
 | `PORT`      | `3001`                                        | HTTP port                     |
 | `MONGO_URI` | `mongodb://127.0.0.1:27017/estate`            | Use your Atlas SRV URI in prod |
+
+---
+
+## Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev                 # http://localhost:3000
+```
+
+Environment variables (`frontend/.env`):
+
+| Key                    | Default                      | Notes                                  |
+| ---------------------- | ---------------------------- | -------------------------------------- |
+| `NUXT_PUBLIC_API_BASE` | `http://localhost:3001/api`  | Backend API URL, used by Pinia / $fetch|
