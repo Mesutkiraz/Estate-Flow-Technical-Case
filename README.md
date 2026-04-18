@@ -60,3 +60,15 @@ Environment variables (`frontend/.env`):
 | Key                    | Default                      | Notes                                  |
 | ---------------------- | ---------------------------- | -------------------------------------- |
 | `NUXT_PUBLIC_API_BASE` | `http://localhost:3001/api`  | Backend API URL, used by Pinia / $fetch|
+
+---
+
+## Latest Updates (Polish Phase)
+
+- **UI / UX Overhaul**: 
+  - Advanced **Glassmorphism** and neon Aurora visual effects integrated natively with TailwindCSS on the Dashboard layout.
+  - Kanban board, Top earning agent ranks, and highly detailed data-tables with stacked agent avatars.
+- **Global Currency Sync**: Replaced hardcoded legacy TRY (₺) currencies to USD ($) everywhere including frontend formats and backend dummy seeds.
+- **Schema Validation Stability**: Resolved nested `Mongoose ValidationErrors` inside `HistoryEntry` and Breakdowns by properly hydrating nested schemas via `@Schema` classes rather than raw objects.
+- **Developer Experience**: Solved unclosed block and Tailwind CSS linting complaints natively for VSCode.
+

@@ -3,6 +3,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AgentsModule } from './agents/agents.module';
 import { CommissionModule } from './commission/commission.module';
+import { TransactionsModule } from './transactions/transactions.module';
+import { ReportsModule } from './reports/reports.module';
 
 @Module({
   imports: [
@@ -17,8 +19,8 @@ import { CommissionModule } from './commission/commission.module';
     }),
     AgentsModule,
     CommissionModule,
+    TransactionsModule,
+    ReportsModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}

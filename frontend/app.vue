@@ -1,7 +1,11 @@
 <template>
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+  <div class="min-h-screen bg-brand-mist">
+    <AppHeader />
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+    <ToastContainer />
+  </div>
 </template>
 
 <script setup lang="ts">

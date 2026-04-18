@@ -117,4 +117,15 @@ NestJS is configured with a global `HttpExceptionFilter` that intercepts all exc
 The Nuxt 3 setup leverages Tailwind CSS for utility-first styling with a specific aesthetic strategy:
 - **Brand Tokens**: We've hooked custom colors (`brand-pink`, `brand-ink`, `brand-graphite`, `brand-mist`) directly into Tailwind's theme object to enforce consistency.
 - **Micro-interactions**: Defined base classes (`.btn-primary`, `.glass-card`, `.stage-dot`) in `main.css` using `@apply` with predefined animations `shimmer`, `fade-in-up`, and `pulse-glow` for immediate developer use.
-- **Transitions**: Native Vue `<Transition>` hooks applied to `page` and `layout` configured in `nuxt.config.ts` to make stage changes fluid without heavy JS overhead.
+- **Transitions**: Native Vue `<Transition>` hooks applied to `page` and `layout` configured in `nuxt.config.ts` to make stage changes fluid without heavy JS overhead.
+
+## 12.  Stabilization 
+
+- **Dashboard UI Architecture (Kanban & Layout):**
+  - Integrated a fully functional 4-column kanban board replacing static metrics, successfully displaying the 3 most recent transaction state transitions in real-time.
+  - Implemented Apple/Stripe-inspired glassmorphism centered Hero headers, eliminating visually heavy abstract geometries in favor of minimalistic, inline gradient data pills for higher premium visual clarity.
+  - Integrated `reports/summary` API response with local Pinia store resolving `agentsStore` references to render an accurate Top Earning Agents Rank directly inside the dashboard.
+- **Backend Schema Strictness (Validation):**
+  - Found and eradicated `Mongoose ValidationError` bugs directly affecting nested records (`HistoryEntry`, `Breakdown`). We removed raw Mongoose objects and established strictly typed NestJS `@Schema()` sub-documents to ensure flawless nesting hydration upon document creation.
+- **Data Consistency:**
+  - Globally converted database mock seeding script (`seed.ts`) and global frontend composables to utilize US Locale parsing (`en-US` and `USD ($)`). This prevents localized parsing ambiguities across the monorepo architecture.
