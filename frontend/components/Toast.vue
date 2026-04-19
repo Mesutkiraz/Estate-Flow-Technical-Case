@@ -2,6 +2,7 @@
   <div
     class="flex items-center gap-3 px-4 py-3 rounded-xl shadow-lg text-sm font-medium animate-fade-in-up"
     :class="classes"
+    role="status"
   >
     <!-- Icon -->
     <svg v-if="toast.type === 'success'" class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -16,7 +17,7 @@
 
     <span class="flex-1">{{ toast.message }}</span>
 
-    <button @click="$emit('dismiss')" class="opacity-50 hover:opacity-100 transition-opacity">
+    <button @click="$emit('dismiss')" class="opacity-50 hover:opacity-100 transition-opacity" aria-label="Dismiss message">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>

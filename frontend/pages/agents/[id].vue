@@ -30,6 +30,10 @@
           <p class="text-brand-graphite/50 mt-0.5">{{ agent.email }}</p>
           <p v-if="agent.phone" class="text-brand-graphite/40 text-sm mt-0.5">{{ agent.phone }}</p>
         </div>
+        <div class="text-right px-4 border-l border-brand-pink/10 hidden sm:block">
+          <p class="text-xs font-semibold text-brand-graphite/50 uppercase tracking-wider mb-1">Total Earnings</p>
+          <p class="text-2xl font-extrabold text-green-500">${{ totalEarnings.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</p>
+        </div>
         <div class="flex gap-2">
           <button @click="showEdit = true" class="btn-secondary text-sm" id="edit-agent-btn">Edit</button>
           <button @click="showDeleteConfirm = true" class="btn-primary !bg-red-500 hover:!bg-red-600 !shadow-none text-sm" id="delete-agent-btn">Delete</button>
@@ -59,16 +63,16 @@
         <template #title>Edit Agent</template>
         <form @submit.prevent="onUpdate" class="space-y-4">
           <div>
-            <label class="block text-sm font-medium text-brand-graphite/70 mb-1.5">Name</label>
-            <input v-model="editForm.name" type="text" required class="input-field" />
+            <label for="edit-agent-name" class="block text-sm font-medium text-brand-graphite/70 mb-1.5">Name</label>
+            <input v-model="editForm.name" type="text" id="edit-agent-name" required class="input-field" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-brand-graphite/70 mb-1.5">Email</label>
-            <input v-model="editForm.email" type="email" required class="input-field" />
+            <label for="edit-agent-email" class="block text-sm font-medium text-brand-graphite/70 mb-1.5">Email</label>
+            <input v-model="editForm.email" type="email" id="edit-agent-email" required class="input-field" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-brand-graphite/70 mb-1.5">Phone</label>
-            <input v-model="editForm.phone" type="tel" class="input-field" />
+            <label for="edit-agent-phone" class="block text-sm font-medium text-brand-graphite/70 mb-1.5">Phone</label>
+            <input v-model="editForm.phone" type="tel" id="edit-agent-phone" class="input-field" />
           </div>
           <div class="flex justify-end gap-3 pt-2">
             <button type="button" @click="showEdit = false" class="btn-secondary">Cancel</button>
@@ -110,6 +114,15 @@ const agentTransactions = computed(() =>
     (t) => t.listingAgentId === agent.value?._id || t.sellingAgentId === agent.value?._id,
   ),
 );
+
+const totalEarnings = computed(() => {
+  if (!agent.value) return 0;
+  return agentTransactions.value.reduce((acc, tx) => {
+    // only count if transaction has a breakdown and is completed? usually we might show all, but let's just sum what's in breakdown
+    const share = tx.breakdown?.agents.find(a => a.agentId === agent.value!._id);
+    return acc + (share?.amount || 0);
+  }, 0);
+});
 
 const editForm = reactive({ name: '', email: '', phone: '' });
 

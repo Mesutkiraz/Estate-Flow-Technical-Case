@@ -21,6 +21,13 @@ deneme-agecny/
 
 ---
 
+## Live URLs
+
+- **Frontend (Vercel):** `[Your Vercel URL Here]`
+- **Backend (Render):** `[Your Render URL Here]`
+
+---
+
 ## Prerequisites
 
 - Node.js 18+ (LTS)
@@ -60,6 +67,27 @@ Environment variables (`frontend/.env`):
 | Key                    | Default                      | Notes                                  |
 | ---------------------- | ---------------------------- | -------------------------------------- |
 | `NUXT_PUBLIC_API_BASE` | `http://localhost:3001/api`  | Backend API URL, used by Pinia / $fetch|
+
+---
+
+## API Surface
+
+**Reports**
+- `GET /api/reports/summary` : Returns highest-level dashboard metrics, pipeline stage summaries, and total earnings.
+
+**Transactions**
+- `GET /api/transactions` : List all transactions (can filter by `agentId`)
+- `GET /api/transactions/:id` : Get single transaction with deep breakdown and history populate.
+- `POST /api/transactions` : Create new transaction in `agreement` stage.
+- `POST /api/transactions/:id/advance` : Advance to next stage (calculates breakdown automatically if completed).
+- `DELETE /api/transactions/:id` : Delete transaction.
+
+**Agents**
+- `GET /api/agents` : List all agents
+- `GET /api/agents/:id` : Get single agent
+- `POST /api/agents` : Create agent (name, email)
+- `PATCH /api/agents/:id` : Update agent details
+- `DELETE /api/agents/:id` : Delete agent (will trigger `Mongoose ValidationErrors` if referenced, though the system uses a soft approach with missing objects vs raw deletes depending on implementation).
 
 ---
 

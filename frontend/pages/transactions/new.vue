@@ -8,28 +8,41 @@
       <p class="mt-1 text-brand-graphite/50">Create a new property transaction</p>
     </div>
 
-    <form @submit.prevent="onSubmit" class="space-y-6">
+    <!-- Success Overlay -->
+    <div v-if="showSuccess" class="fixed inset-0 z-50 flex items-center justify-center bg-white/80 backdrop-blur-sm">
+      <div class="flex flex-col items-center animate-fade-in-up">
+        <div class="w-24 h-24 rounded-full bg-green-100 flex items-center justify-center mb-4">
+          <svg class="w-12 h-12 text-green-500 checkmark-anim" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-brand-ink">Transaction Created!</h2>
+        <p class="text-brand-graphite/60 mt-2">Redirecting to details...</p>
+      </div>
+    </div>
+
+    <form v-else @submit.prevent="onSubmit" class="space-y-6">
       <!-- Property info -->
       <div class="glass-card">
         <h2 class="text-sm font-semibold text-brand-graphite/60 uppercase tracking-wider mb-4">Property Details</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-sm font-medium text-brand-graphite/70 mb-1.5">Address</label>
+            <label for="input-address" class="block text-sm font-medium text-brand-graphite/70 mb-1.5">Address</label>
             <input v-model="form.property.address" type="text" required
               class="input-field" placeholder="e.g. Bağdat Cad. No:42" id="input-address" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-brand-graphite/70 mb-1.5">City</label>
+            <label for="input-city" class="block text-sm font-medium text-brand-graphite/70 mb-1.5">City</label>
             <input v-model="form.property.city" type="text" required
               class="input-field" placeholder="e.g. Istanbul" id="input-city" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-brand-graphite/70 mb-1.5">Property Type</label>
+            <label for="input-type" class="block text-sm font-medium text-brand-graphite/70 mb-1.5">Property Type</label>
             <input v-model="form.property.type" type="text" required
               class="input-field" placeholder="e.g. Apartment, Villa" id="input-type" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-brand-graphite/70 mb-1.5">Price ($)</label>
+            <label for="input-price" class="block text-sm font-medium text-brand-graphite/70 mb-1.5">Price ($)</label>
             <input v-model.number="form.property.price" type="number" min="1" step="0.01" required
               class="input-field" placeholder="3500000" id="input-price" />
           </div>
@@ -40,7 +53,7 @@
       <div class="glass-card">
         <h2 class="text-sm font-semibold text-brand-graphite/60 uppercase tracking-wider mb-4">Financials</h2>
         <div>
-          <label class="block text-sm font-medium text-brand-graphite/70 mb-1.5">Service Fee Amount ($)</label>
+          <label for="input-service-fee" class="block text-sm font-medium text-brand-graphite/70 mb-1.5">Service Fee Amount ($)</label>
           <input v-model.number="form.serviceFeeAmount" type="number" min="0.01" step="0.01" required
             class="input-field" placeholder="105000" id="input-service-fee" />
         </div>
@@ -100,6 +113,7 @@ const txStore = useTransactionsStore();
 const agentsStore = useAgentsStore();
 
 const submitting = ref(false);
+const showSuccess = ref(false);
 
 const form = reactive({
   property: {
@@ -124,7 +138,10 @@ async function onSubmit() {
       listingAgentId: form.listingAgentId,
       sellingAgentId: form.sellingAgentId,
     });
-    router.push(`/transactions/${tx._id}`);
+    showSuccess.value = true;
+    setTimeout(() => {
+      router.push(`/transactions/${tx._id}`);
+    }, 1500);
   } finally {
     submitting.value = false;
   }
@@ -137,5 +154,15 @@ async function onSubmit() {
          transition-all duration-200
          focus:outline-none focus:ring-2 focus:ring-brand-pink/30 focus:border-brand-pink
          placeholder:text-gray-300;
+}
+
+@keyframes drawCheck {
+  0% { stroke-dasharray: 0, 100; opacity: 0; }
+  100% { stroke-dasharray: 100, 100; opacity: 1; }
+}
+.checkmark-anim path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: drawCheck 0.6s ease-out forwards;
 }
 </style>

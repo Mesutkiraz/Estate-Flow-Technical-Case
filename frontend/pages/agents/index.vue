@@ -65,15 +65,15 @@
 
       <form @submit.prevent="onCreateAgent" class="space-y-4">
         <div>
-          <label class="block text-sm font-medium text-brand-graphite/70 mb-1.5">Name</label>
+          <label for="input-agent-name" class="block text-sm font-medium text-brand-graphite/70 mb-1.5">Name</label>
           <input v-model="createForm.name" type="text" required class="input-field" placeholder="Full name" id="input-agent-name" />
         </div>
         <div>
-          <label class="block text-sm font-medium text-brand-graphite/70 mb-1.5">Email</label>
+          <label for="input-agent-email" class="block text-sm font-medium text-brand-graphite/70 mb-1.5">Email</label>
           <input v-model="createForm.email" type="email" required class="input-field" placeholder="agent@email.com" id="input-agent-email" />
         </div>
         <div>
-          <label class="block text-sm font-medium text-brand-graphite/70 mb-1.5">Phone (optional)</label>
+          <label for="input-agent-phone" class="block text-sm font-medium text-brand-graphite/70 mb-1.5">Phone (optional)</label>
           <input v-model="createForm.phone" type="tel" class="input-field" placeholder="+90 5XX XXX XXXX" id="input-agent-phone" />
         </div>
 

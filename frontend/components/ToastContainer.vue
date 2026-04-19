@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed bottom-6 right-6 z-[200] flex flex-col gap-2 max-w-sm" id="toast-container">
+  <div class="fixed bottom-6 right-6 z-[200] flex flex-col gap-2 max-w-sm" id="toast-container" aria-live="polite">
     <TransitionGroup name="toast">
       <Toast
         v-for="toast in toasts.items"

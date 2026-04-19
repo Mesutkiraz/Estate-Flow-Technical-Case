@@ -1,7 +1,8 @@
 <template>
-  <div class="relative" :id="id">
-    <label v-if="label" class="block text-sm font-medium text-brand-graphite/70 mb-1.5">{{ label }}</label>
+  <div class="relative">
+    <label v-if="label" :for="id" class="block text-sm font-medium text-brand-graphite/70 mb-1.5">{{ label }}</label>
     <select
+      :id="id"
       :value="modelValue"
       @change="$emit('update:modelValue', ($event.target as HTMLSelectElement).value)"
       class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-brand-ink text-sm font-medium
