@@ -118,7 +118,7 @@ const agentTransactions = computed(() =>
 const totalEarnings = computed(() => {
   if (!agent.value) return 0;
   return agentTransactions.value.reduce((acc, tx) => {
-    // only count if transaction has a breakdown and is completed? usually we might show all, but let's just sum what's in breakdown
+    if (tx.stage !== 'completed') return acc;
     const share = tx.breakdown?.agents.find(a => a.agentId === agent.value!._id);
     return acc + (share?.amount || 0);
   }, 0);

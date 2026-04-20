@@ -72,15 +72,15 @@
               </div>
 
               <div
-                v-if="tx.sellingAgent && tx.sellingAgent._id !== tx.listingAgent?._id"
+                v-if="(!tx.sellingAgent && tx.sellingAgentId) || (tx.sellingAgent && tx.sellingAgent._id !== tx.listingAgent?._id)"
                 class="flex items-center gap-3 p-3 rounded-xl bg-purple-50"
               >
                 <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 font-bold flex items-center justify-center">
-                  {{ tx.sellingAgent.name.charAt(0) }}
+                  {{ tx.sellingAgent?.name?.charAt(0) || '?' }}
                 </div>
                 <div class="flex-1">
-                  <div class="font-semibold text-brand-ink text-sm">{{ tx.sellingAgent.name }}</div>
-                  <div class="text-xs text-brand-graphite/40">{{ tx.sellingAgent.email }}</div>
+                  <div class="font-semibold text-brand-ink text-sm">{{ tx.sellingAgent?.name || 'Deleted Agent' }}</div>
+                  <div class="text-xs text-brand-graphite/40">{{ tx.sellingAgent?.email || 'No email available' }}</div>
                 </div>
                 <span class="chip !bg-purple-100 !text-purple-600">Selling</span>
               </div>

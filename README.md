@@ -23,8 +23,12 @@ deneme-agecny/
 
 ## Live URLs
 
-- **Frontend (Vercel):** `[Your Vercel URL Here]`
-- **Backend (Render):** `[Your Render URL Here]`
+- **Frontend (Vercel):** [https://estate-flow-technical-case.vercel.app](https://estate-flow-technical-case.vercel.app)
+- **Backend (Render):** [https://estate-flow-backend-oicu.onrender.com/api](https://estate-flow-backend-oicu.onrender.com/api)
+
+> [!NOTE]
+> **Initial Load Delay:** The API is hosted on Render's free tier. If the service has been inactive, the first request may take **30-50 seconds** to spin up (cold start). Once awake, the application performs with standard latency.
+
 
 ---
 

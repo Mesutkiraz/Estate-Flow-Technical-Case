@@ -73,8 +73,10 @@ import type { Stage } from '~/types';
 
 useHead({ title: 'Transactions' });
 
+const route = useRoute();
 const txStore = useTransactionsStore();
-const activeFilter = ref('');
+const queryStage = route.query.stage as string;
+const activeFilter = ref(STAGES.includes(queryStage as any) ? queryStage : '');
 
 onMounted(() => txStore.fetchAll());
 

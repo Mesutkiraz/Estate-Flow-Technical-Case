@@ -53,13 +53,13 @@ const props = defineProps<{
 const fmt = useFormat();
 
 function agentName(agentId: string): string {
-  if (!props.transaction) return agentId.slice(-6);
-  if (props.transaction.listingAgent?._id === agentId) return props.transaction.listingAgent.name;
-  if (props.transaction.sellingAgent?._id === agentId) return props.transaction.sellingAgent.name;
-  return agentId.slice(-6);
+  if (props.transaction?.listingAgent?._id === agentId) return props.transaction.listingAgent.name;
+  if (props.transaction?.sellingAgent?._id === agentId) return props.transaction.sellingAgent.name;
+  return 'Deleted Agent';
 }
 
 function agentInitial(agentId: string): string {
-  return agentName(agentId).charAt(0).toUpperCase();
+  const name = agentName(agentId);
+  return name === 'Deleted Agent' ? '?' : name.charAt(0).toUpperCase();
 }
 </script>
